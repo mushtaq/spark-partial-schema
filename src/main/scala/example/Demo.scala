@@ -14,7 +14,7 @@ object Demo {
 
     spark.sparkContext.setLogLevel("ERROR")
 
-    val schema = Files.readString(Paths.get("src/main/resources/schema.ddl"))
+    val schema = Files.readString(Paths.get("src/main/resources/schemaLikePython.ddl"))
 
     val df = spark.read
       .schema(schema)
