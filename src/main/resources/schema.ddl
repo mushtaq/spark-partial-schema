@@ -1,1 +1,0 @@
-Item STRUCT<a: MAP<String, String>, b: MAP<String, String>, c: MAP<String, String>>
