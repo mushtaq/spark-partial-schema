@@ -12,17 +12,15 @@ object Helper {
     .build() :: ClassTagExtensions
 
   @tailrec
-  def get[T](input: Any, keys: List[String]): T = input match {
-    case null => null.asInstanceOf[T]
-    case _ =>
-      keys match {
-        case ::(head, next) => get(input.asInstanceOf[Map[String, Object]](head), next)
-        case Nil            => input.asInstanceOf[T]
-      }
+  def get(input: Any, keys: List[String]): Any = (input, keys) match {
+    case (x: Map[Any, Any], head :: tail) => get(x(head), tail)
+    case _                                => input
   }
 
-  def extract[T](input: String, path: String): T = input match {
-    case null => null.asInstanceOf[T]
-    case _    => get[T](mapper.readValue(input), path.split("\\.").toList)
-  }
+  def extract[T](input: String, path: String): T = {
+    input match {
+      case null => null
+      case _    => get(mapper.readValue(input), path.split("\\.").toList)
+    }
+  }.asInstanceOf[T]
 }
