@@ -6,16 +6,10 @@ import com.fasterxml.jackson.module.scala.{ClassTagExtensions, DefaultScalaModul
 import scala.annotation.tailrec
 
 object Helper {
-  val mapper: ClassTagExtensions.Mixin = JsonMapper
+  private val mapper: ClassTagExtensions.Mixin = JsonMapper
     .builder()
     .addModule(DefaultScalaModule)
     .build() :: ClassTagExtensions
-
-  @tailrec
-  def get(input: Any, keys: List[String]): Any = (input, keys) match {
-    case (x: Map[Any, Any], head :: tail) => get(x(head), tail)
-    case _                                => input
-  }
 
   def extract[T](input: String, path: String): T = {
     input match {
@@ -23,4 +17,10 @@ object Helper {
       case _    => get(mapper.readValue(input), path.split("\\.").toList)
     }
   }.asInstanceOf[T]
+
+  @tailrec
+  private def get(input: Any, keys: List[String]): Any = (input, keys) match {
+    case (x: Map[Any, Any], head :: tail) => get(x(head), tail)
+    case _                                => input
+  }
 }
