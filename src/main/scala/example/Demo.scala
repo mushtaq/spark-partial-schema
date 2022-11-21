@@ -26,11 +26,11 @@ object Demo {
     import Helper._
     import spark.implicits._
 
-    val extractUDF = f.udf(extract[String] _)
+    val extractAppId = f.udf(extract[String](_, "app.M.id.S"))
 
     val df2 = df
       .where($"Item.partitionId.S" === "pid1")
-      .withColumn("appid", extractUDF($"Item.custom_key1.M", f.lit("app.M.id.S")))
+      .withColumn("appid", extractAppId($"Item.custom_key1.M"))
       .where($"appid" === "app1")
       .drop("appid")
 
