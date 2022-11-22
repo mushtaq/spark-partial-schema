@@ -21,12 +21,10 @@ object Demo {
 
     df.show()
 
-    import spark.implicits._
-
     val appId = extractColumn[String]("Item.custom_key1.M", "app.M.id.S")
 
     val df2 = df
-      .where($"Item.partitionId.S" === "pid1")
+      .where(f.col("Item.partitionId.S") === "pid1")
       .where(appId === "app1")
 
     df2.show()
