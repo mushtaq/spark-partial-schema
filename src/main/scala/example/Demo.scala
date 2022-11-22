@@ -1,12 +1,14 @@
 package example
 
-import org.apache.spark.sql.SparkSession
-import org.apache.spark.sql.{functions => f}
+import org.apache.spark.sql.{Column, SparkSession, functions => f}
+
+import scala.reflect.runtime.universe.TypeTag
 
 object Demo {
 
   def main(args: Array[String]): Unit = {
-    val spark = SparkSession.builder
+    val spark = SparkSession
+      .builder()
       .appName("Simple Application")
       .master("local[*]")
       .getOrCreate()
@@ -21,17 +23,16 @@ object Demo {
 
     import spark.implicits._
 
-    val extractAppId = f.udf(Helper.extract[String](_, "app.M.id.S"))
+    val appId = extractColumn[String]("Item.custom_key1.M", "app.M.id.S")
 
     val df2 = df
       .where($"Item.partitionId.S" === "pid1")
-      .withColumn("appid", extractAppId($"Item.custom_key1.M"))
-      .where($"appid" === "app1")
-      .drop("appid")
+      .where(appId === "app1")
 
     df2.show()
 
     spark.stop()
   }
 
+  def extractColumn[T: TypeTag](col: String, path: String): Column = f.udf(Helper.extract[T](_, path)).apply(f.col(col))
 }
