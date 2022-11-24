@@ -1,8 +1,6 @@
 package example
 
-import org.apache.spark.sql.{Column, SparkSession, functions => f}
-
-import scala.reflect.runtime.universe.TypeTag
+import org.apache.spark.sql.{SparkSession, functions => f}
 
 object Demo {
 
@@ -21,16 +19,13 @@ object Demo {
 
     df.show()
 
-    val appId = extractColumn[String]("Item.custom_key1.M", "app.M.id.S")
-
     val df2 = df
       .where(f.col("Item.partitionId.S") === "pid1")
-      .where(appId === "app1")
+      .where(Udf.valueOf[String]("Item.custom_key1.M", "app.M.id.S") === "app1")
 
     df2.show()
 
     spark.stop()
   }
 
-  def extractColumn[T: TypeTag](col: String, path: String): Column = f.udf(Helper.extract[T](_, path)).apply(f.col(col))
 }
