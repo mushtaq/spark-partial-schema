@@ -28,12 +28,11 @@ object Approach2Batching {
     // split the large dataframe into smaller ones, choosing appropriate number of batches
     // then read each smaller dataframe as json with schema inference
     val jsonDfs: Array[DataFrame] = inputDf
-      .randomSplit(Array.fill(batches)(6))
+      .randomSplit(Array.fill(batches)(6)) // for large data instead of weight of 6 use 1
       .map(spark.read.json)
 
     // write each json dataframe into the same location in append only mode and keep merging schemas
     jsonDfs.foreach { jsonDf =>
-      println(jsonDf.count())
       jsonDf.write
         .format(format)
         .option("mergeSchema", "true") // this is used only when format is delta
