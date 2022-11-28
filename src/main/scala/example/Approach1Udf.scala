@@ -2,7 +2,7 @@ package example
 
 import org.apache.spark.sql.{SparkSession, functions => f}
 
-object Demo {
+object Approach1Udf {
 
   def main(args: Array[String]): Unit = {
     val spark = SparkSession
