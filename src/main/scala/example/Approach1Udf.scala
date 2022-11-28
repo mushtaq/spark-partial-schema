@@ -7,7 +7,7 @@ object Approach1Udf {
   def main(args: Array[String]): Unit = {
     val spark = SparkSession
       .builder()
-      .appName("Simple Application")
+      .appName("udf-approach")
       .master("local[*]")
       .getOrCreate()
 

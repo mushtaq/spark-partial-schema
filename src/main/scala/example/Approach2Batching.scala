@@ -7,7 +7,7 @@ object Approach2Batching {
   def main(args: Array[String]): Unit = {
     val spark = SparkSession
       .builder()
-      .appName("Delta App")
+      .appName("batching-approach")
       .master("local[*]")
       .getOrCreate()
 
