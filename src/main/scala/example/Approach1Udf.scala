@@ -15,7 +15,7 @@ object Approach1Udf {
 
     val df = spark.read
       .schema("Item MAP<String, MAP<String, String>>")
-      .json("src/main/resources/inputList.json")
+      .json("src/main/resources/input.json.gz")
 
     df.show()
 
