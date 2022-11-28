@@ -1,18 +1,18 @@
-{"Item": {"partitionId": {"S": "pid1"}, "custom_key3": {"M": 123}}}
-{"Item": {"partitionId": {"S": "pid1"}, "custom_key3": {"M": 234}}}
-{"Item": {"partitionId": {"S": "pid2"}, "custom_key3": {"M": 908}}}
-{"Item": {"partitionId": {"S": "pid1"}, "custom_key1": {"M": {"app": {"M":  {"id":  {"S":  "app1"}}}}}}}
-{"Item": {"partitionId": {"S": "pid1"}, "custom_key1": {"M": {"app": {"M":  {"id":  {"S":  "app2"}}}}}}}
-{"Item": {"partitionId": {"S": "pid2"}, "custom_key1": {"M": {"app": {"M":  {"id":  {"S":  "app1"}}}}}}}
-{"Item": {"partitionId": {"S": "pid2"}, "custom_key2": {"M": {"doc": {"M":  {"meta":  {"M":  {"createdBy": {"S":  "mushtaq"}}}}}}}}}
-{"Item": {"partitionId": {"S": "pid2"}, "custom_key2": {"M": {"doc": {"M":  {"meta":  {"M":  {"createdBy": {"S":  "santosh"}}}}}}}}}
-{"Item": {"partitionId": {"S": "pid1"}, "custom_key2": {"M": {"doc": {"M":  {"meta":  {"M":  {"createdBy": {"S":  "mushtaq"}}}}}}}}}
-{"Item": {"partitionId": {"S": "pid1"}, "custom_key3": {"M": 123}}}
-{"Item": {"partitionId": {"S": "pid1"}, "custom_key3": {"M": 234}}}
-{"Item": {"partitionId": {"S": "pid2"}, "custom_key3": {"M": 908}}}
-{"Item": {"partitionId": {"S": "pid1"}, "custom_key1": {"M": {"app": {"M":  {"id":  {"S":  "app1"}}}}}}}
-{"Item": {"partitionId": {"S": "pid1"}, "custom_key1": {"M": {"app": {"M":  {"id":  {"S":  "app2"}}}}}}}
-{"Item": {"partitionId": {"S": "pid2"}, "custom_key1": {"M": {"app": {"M":  {"id":  {"S":  "app1"}}}}}}}
-{"Item": {"partitionId": {"S": "pid2"}, "custom_key2": {"M": {"doc": {"M":  {"meta":  {"M":  {"createdBy": {"S":  "mushtaq"}}}}}}}}}
-{"Item": {"partitionId": {"S": "pid2"}, "custom_key2": {"M": {"doc": {"M":  {"meta":  {"M":  {"createdBy": {"S":  "santosh"}}}}}}}}}
-{"Item": {"partitionId": {"S": "pid1"}, "custom_key2": {"M": {"doc": {"M":  {"meta":  {"M":  {"createdBy": {"S":  "mushtaq"}}}}}}}}}
+{"Item": {"pid": {"S": "pid1"}, "custom_key3": {"M": 123}}}
+{"Item": {"pid": {"S": "pid1"}, "custom_key3": {"M": 234}}}
+{"Item": {"pid": {"S": "pid2"}, "custom_key3": {"M": 908}}}
+{"Item": {"pid": {"S": "pid1"}, "custom_key1": {"M": {"app": {"M":  {"id":  {"S":  "app1"}}}}}}}
+{"Item": {"pid": {"S": "pid1"}, "custom_key1": {"M": {"app": {"M":  {"id":  {"S":  "app2"}}}}}}}
+{"Item": {"pid": {"S": "pid2"}, "custom_key1": {"M": {"app": {"M":  {"id":  {"S":  "app1"}}}}}}}
+{"Item": {"pid": {"S": "pid2"}, "custom_key2": {"M": {"doc": {"M":  {"metadata":  {"M":  {"createdBy": {"S":  "mushtaq"}}}}}}}}}
+{"Item": {"pid": {"S": "pid2"}, "custom_key2": {"M": {"doc": {"M":  {"metadata":  {"M":  {"createdBy": {"S":  "santosh"}}}}}}}}}
+{"Item": {"pid": {"S": "pid1"}, "custom_key2": {"M": {"doc": {"M":  {"metadata":  {"M":  {"createdBy": {"S":  "mushtaq"}}}}}}}}}
+{"Item": {"pid": {"S": "pid1"}, "custom_key3": {"M": 123}}}
+{"Item": {"pid": {"S": "pid1"}, "custom_key3": {"M": 234}}}
+{"Item": {"pid": {"S": "pid2"}, "custom_key3": {"M": 908}}}
+{"Item": {"pid": {"S": "pid1"}, "custom_key1": {"M": {"app": {"M":  {"id":  {"S":  "app1"}}}}}}}
+{"Item": {"pid": {"S": "pid1"}, "custom_key1": {"M": {"app": {"M":  {"id":  {"S":  "app2"}}}}}}}
+{"Item": {"pid": {"S": "pid2"}, "custom_key1": {"M": {"app": {"M":  {"id":  {"S":  "app1"}}}}}}}
+{"Item": {"pid": {"S": "pid2"}, "custom_key2": {"M": {"doc": {"M":  {"metadata":  {"M":  {"createdBy": {"S":  "mushtaq"}}}}}}}}}
+{"Item": {"pid": {"S": "pid2"}, "custom_key2": {"M": {"doc": {"M":  {"metadata":  {"M":  {"createdBy": {"S":  "santosh"}}}}}}}}}
+{"Item": {"pid": {"S": "pid1"}, "custom_key2": {"M": {"doc": {"M":  {"metadata":  {"M":  {"createdBy": {"S":  "mushtaq"}}}}}}}}}

@@ -20,7 +20,7 @@ object Approach1Udf {
     df.show()
 
     val df2 = df
-      .where(f.col("Item.partitionId.S") === "pid1")
+      .where(f.col("Item.pid.S") === "pid1")
       .where(Udf.valueOf[String]("Item.custom_key1.M", "app.M.id.S") === "app1")
 
     df2.show()
