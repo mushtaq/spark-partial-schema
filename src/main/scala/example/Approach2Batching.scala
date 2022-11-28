@@ -1,6 +1,6 @@
 package example
 
-import org.apache.spark.sql.{Dataset, SparkSession}
+import org.apache.spark.sql.{DataFrame, Dataset, SparkSession}
 
 object Approach2Batching {
 
@@ -27,7 +27,7 @@ object Approach2Batching {
 
     // split the large dataframe into smaller ones, choosing appropriate number of batches
     // then read each smaller dataframe as json with schema inference
-    val jsonDfs = inputDf
+    val jsonDfs: Array[DataFrame] = inputDf
       .randomSplit(Array.fill(batches)(6))
       .map(spark.read.json)
 
