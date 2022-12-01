@@ -18,6 +18,8 @@ object Approach2Batching {
 //    val format = "delta"
     val format = "parquet"
     val dataPath = "/tmp/data"
+    // batchsize = total data / workload that does not OOM
+    // batchsize = 1000 MB / 10 MB = 100
     val batches = 3
 
     // read input json as plain text so that there is no schema inference

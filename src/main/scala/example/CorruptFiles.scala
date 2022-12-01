@@ -4,6 +4,8 @@ import org.apache.spark.sql.types.StructType
 import org.apache.spark.sql.{SparkSession, functions => f}
 import org.apache.spark.sql.expressions.Window
 
+import scala.util.chaining.scalaUtilChainingOps
+
 object CorruptFiles {
 
   def main(args: Array[String]): Unit = {
@@ -38,6 +40,7 @@ object CorruptFiles {
       .where(f.col("rowNum") % 2 === 0)
       .withColumn("json", f.from_json(f.col("value"), StructType.fromDDL(schema)))
       .select("json.Item")
+      .tap(_.show(false))
 
     val allItemDf = itemDf.select("Item").union(fixedDf.select("Item"))
 
