@@ -1,0 +1,2 @@
+{"Item": {"pid": {"S": "pid7"}, "custom_key": {"M": 9}}}
+{"Item": {"pid": {"S": "pid8"}, "custom_key": {"M": 10}}}
