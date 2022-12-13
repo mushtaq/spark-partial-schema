@@ -23,14 +23,31 @@ object CorruptFiles {
     val exportedDf = spark.read
       .text("src/main/resources/exports")
       .withColumn("json", json)
-      .select("json.Item", "json._corrupt_record")
+      .select("json.Item", "json._corrupt_record", "value")
 
-    val itemDf = exportedDf.where(f.col("_corrupt_record").isNull)
-    val corruptDf = exportedDf.where(f.col("_corrupt_record").isNotNull)
+    val isItem = f.col("Item").isNotNull
+    val isCorruptRecord = f.col("_corrupt_record").isNotNull
+    val hasWrongSchema = f.not(isItem || isCorruptRecord)
+
+    val itemDf = exportedDf
+      .where(isItem)
+      .select("Item")
+
+    val corruptDf =
+      exportedDf
+        .where(hasWrongSchema)
+        .select(f.col("value").as("_corrupt_record"))
+        .union(
+          exportedDf
+            .where(isCorruptRecord)
+            .select("_corrupt_record")
+        )
 
     val fixedDf = corruptDf
       .withColumn("fileName", f.input_file_name())
       .withColumn("rowNum", f.row_number().over(W.orderBy("fileName")))
+      .drop("fileName")
+      .tap(_.show(false))
       .withColumn("group", ((f.col("rowNum") - 1) / 2).cast("int"))
       .withColumn("list", f.collect_list("_corrupt_record").over(W.partitionBy("group")))
       .withColumn("value", f.array_join(f.col("list"), ""))
