@@ -11,12 +11,10 @@ object Helper {
     .addModule(DefaultScalaModule)
     .build() :: ClassTagExtensions
 
-  def extract[T](input: String, path: String): T = {
-    input match {
-      case null => null
-      case _    => get(mapper.readValue(input), path.split("\\.").toList)
-    }
-  }.asInstanceOf[T]
+  def extract(input: String, path: String): Any = input match {
+    case null => null
+    case _    => get(mapper.readValue(input), path.split("\\.").toList)
+  }
 
   @tailrec
   private def get(input: Any, keys: List[String]): Any = (input, keys) match {
