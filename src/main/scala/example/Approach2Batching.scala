@@ -1,6 +1,6 @@
 package example
 
-import org.apache.spark.sql.{DataFrame, Dataset, SparkSession}
+import org.apache.spark.sql.{DataFrame, Dataset, SparkSession, functions => f}
 
 object Approach2Batching {
 
@@ -15,11 +15,10 @@ object Approach2Batching {
 
     import spark.implicits._
 
-//    val format = "delta"
-    val format = "parquet"
-    val dataPath = "/tmp/data"
-    // batchsize = total data / workload that does not OOM
-    // batchsize = 1000 MB / 10 MB = 100
+    val format = "parquet" // change this to delta to enable mergeSchema on write as commented below
+    val outputDataPath = "/tmp/data"
+    // batches = total data / workload that does not OOM
+    // batches = 1000 MB / 10 MB = 100
     val batches = 3
 
     // read input json as plain text so that there is no schema inference
@@ -39,14 +38,14 @@ object Approach2Batching {
         .format(format)
         .option("mergeSchema", "true") // this is used only when format is delta
         .mode("append")
-        .save(dataPath)
+        .save(outputDataPath)
     }
 
     // read the complete dataframe from the saved location to confirm that schema merging is complete
     val readData = spark.read
       .option("mergeSchema", "true") // this is not required when format is delta
       .format(format)
-      .load(dataPath)
+      .load(outputDataPath)
 
     readData.printSchema()
     readData.show()
